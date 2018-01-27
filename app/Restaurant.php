@@ -8,4 +8,5 @@ class Restaurant extends Model
 {
     //
     protected $fillable = ['name', 'location'];
+
 }

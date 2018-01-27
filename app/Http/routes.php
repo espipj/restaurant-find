@@ -91,7 +91,31 @@ Route::delete('/restaurant/{id}', function ($id) {
 
 
 Route::get('/find', function () {
-    return view('find');
+    $restaurants=Restaurant::all();
+    return view('find', compact('restaurants'));
+
+});
+
+
+
+Route::post('/find', function (Request $request) {
+    $validator = Validator::make($request->all(), [
+        'location' => 'required',
+        'idclosest' => 'required',
+        'duration' => 'required',
+    ]);
+
+    if ($validator->fails()) {
+        return redirect()
+            ->back()
+            ->withInput()
+            ->withErrors($validator);
+    }
+
+    $restaurant=Restaurant::findOrFail($request->idclosest);
+    $location=$request->location;
+    $duration=$request->duration;
+    return view('result', compact('restaurant','location','duration'));
 
 });
 

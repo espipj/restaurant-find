@@ -1,0 +1,10 @@
+html, body, .container-fluid,#map {
+    height:100%;
+}
+.container-fluid {
+    width:75%;
+}
+#map {
+    border-top:50px solid #fff;
+    border-bottom:20px solid #fff;
+}
