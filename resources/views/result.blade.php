@@ -31,7 +31,6 @@
     <script charset="utf-8">
         var dest= {!! $restaurant !!};
         var locs= $("#location").text();
-        console.log(locs);
         function initMap() {
             var directionsService = new google.maps.DirectionsService;
             var directionsDisplay = new google.maps.DirectionsRenderer;

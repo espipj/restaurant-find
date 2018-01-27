@@ -62,6 +62,8 @@
             console.warn('ERROR(' + err.code + '): ' + err.message);
         };
 
+        //Used for testing
+        //getDistance(41.9703574,-7.654443);
         navigator.geolocation.getCurrentPosition(success, error, options);
 
     }
@@ -98,9 +100,9 @@
                 var origin0 = origins[0];
                 var destinations = response.destinationAddresses;
                 var closest= destinations[0];
-                var mindur = response.rows[0].elements[0].duration;
+                var mindur = response.rows[0].elements[0].duration.value;
+                var mindurstr = response.rows[0].elements[0].duration;
                 var restaurantid=restaurants[0].id;
-                console.log("Duracionmin "+mindur);
                 for (var i = 0; i < origins.length; i++) {
                     var results = response.rows[i].elements;
                     for (var j = 0; j < results.length; j++) {
@@ -112,22 +114,19 @@
                         console.log("From "+from+" to "+to);
                         console.log("Distance " + distance);
                         console.log("Duration " + duration);
-                        if (mindur>=element.duration.value){
+                        if (mindur>element.duration.value){
                             origin0=from;
                             closest=to;
-                            mindur=element.duration;
+                            mindurstr=element.duration;
                             restaurantid=restaurants[j].id;
                         }
                     }
                 }
                 console.log("Closest: "+closest);
-                console.log("Duration: "+mindur.text);
-                console.log("ReST ID: "+restaurantid);
+                console.log("Duration: "+mindurstr.text);
                 $("#idclosest").val(restaurantid);
                 $("#location").val(origin0);
-                $("#duration").val(mindur.text);
-
-                console.log("DURACION"+ $("#duration").val());
+                $("#duration").val(mindurstr.text);
                 $("#findform").submit();
             }
 
